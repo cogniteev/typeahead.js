@@ -1,7 +1,7 @@
 /*!
- * typeahead.js 0.11.1
+ * typeahead.js 0.11.1-post1
  * https://github.com/twitter/typeahead.js
- * Copyright 2013-2015 Twitter, Inc. and other contributors; Licensed MIT
+ * Copyright 2013-2016 Twitter, Inc. and other contributors; Licensed MIT
  */
 
 (function(root, factory) {
@@ -151,7 +151,7 @@
             noop: function() {}
         };
     }();
-    var VERSION = "0.11.1";
+    var VERSION = "0.11.1-post1";
     var tokenizers = function() {
         "use strict";
         return {
@@ -1720,8 +1720,9 @@
                     suggestions = suggestions || [];
                     if (!canceled && rendered < that.limit) {
                         that.cancel = $.noop;
-                        rendered += suggestions.length;
-                        that._append(query, suggestions.slice(0, that.limit - rendered));
+                        var suggestionsToAppend = suggestions.slice(0, that.limit - rendered);
+                        that._append(query, suggestionsToAppend);
+                        rendered += suggestionsToAppend.length;
                         that.async && that.trigger("asyncReceived", query);
                     }
                 }
